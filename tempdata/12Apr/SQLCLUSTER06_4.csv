@@ -1,0 +1,779 @@
+﻿select * from 
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] d,22873,1626,21247,65927,0,22873
+select * from 
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] d
+  where d.Id_IM_Control is not null,18907,1405,17502,65927,0,18907
+select * from 
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] d
+  where d.Id_IM_Control is not null
+  and DATEDIFF(MONTH,d.CDS_TMESTAMP,getdate()) <=2,2844,1511,1333,72742,0,2844
+select * from 
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] d
+  where d.Id_IM_Control is not null
+  and DATEDIFF(MONTH,d.CDS_TMESTAMP,getdate()) <=2
+  and d.CTG_TMESTAMP is not null,2839,1533,1306,72742,0,2839
+select * from 
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] d
+  where d.Id_IM_Control is not null
+  and DATEDIFF(MONTH,d.CDS_TMESTAMP,getdate()) <=2
+  and d.EBMS_TIMESTAMP is null,2719,1461,1258,72742,0,2719
+  SELECT *
+  FROM [Uat_THPNSW].[dbo].[T_IM_DETAIL] -- where [House_Air_Waybill] in ('CP534951255VN','CP591161763VN')
+ where [Status] = 1
+ order by [Master_Air_Waybill]
+
+
+ /*
+[Master_Air_Waybill] = 'ATVIEBTHBKKAACN40027005000172' --
+
+
+
+  update [Uat_THPNSW].[dbo].[T_IM_DETAIL] 
+  set [Id_IM_Control] = null
+		,[Last_Entry] = 'N'
+		,[CTG_TMESTAMP] = null
+  where [House_Air_Waybill] = 'CA349256265AT';
+
+  */,1192,461,731,71634,0,1192
+CREATE PROCEDURE [core].[sp_purge_orphaned_notable_query_plan]
+    @duration smallint = NULL,
+    @end_time datetime = NULL,
+    @delete_batch_size int = 500
+AS
+BEGIN
+    PRINT 'Begin purging orphaned records in snapshots.notable_query_plan Current UTC Time:' + CONVERT(VARCHAR, GETUTCDATE())
+
+    DECLARE @stop_purge int
+
+    -- Delete orphaned rows from snapshots.notable_query_plan.  Query plans are not deleted by the generic purge 
+    -- process that deletes other data (above) because query plan rows are not tied to a particular snapshot ID. 
+    -- Purging query plans table  as a special case, by looking for plans that 
+    -- are no longer referenced by any of the rows in the snapshots.query_stats table.  We need to delete these 
+    -- rows in small chunks, since deleting many GB in a single delete statement would cause lock escalation and 
+    -- an explosion in the size of the transaction log (individual query plans can be 10-50MB).  
+    DECLARE @rows_affected int;
+    -- set expected rows affected as delete batch size
+    SET @rows_affected = @delete_batch_size;
+    
+    -- select set of orphaned query plans to be deleted into a temp table 
+    SELECT qp.[sql_handle],
+        qp.plan_handle,
+        qp.plan_generation_num,
+        qp.statement_start_offset,
+        qp.statement_end_offset,
+        qp.creation_time
+    INTO #tmp_notable_query_plan
+    FROM snapshots.notable_query_plan AS qp 
+    WHERE NOT EXISTS (
+        SELECT snapshot_id 
+        FROM snapshots.query_stats AS qs
+        WHERE qs.[sql_handle] = qp.[sql_handle] AND qs.plan_handle = qp.plan_handle 
+            AND qs.plan_generation_num = qp.plan_generation_num 
+            AND qs.statement_start_offset = qp.statement_start_offset 
+            AND qs.statement_end_offset = qp.statement_end_offset 
+            AND qs.creation_time = qp.creation_time)
+
+    WHILE (@rows_affected = @delete_batch_size)
+    BEGIN
+        -- Deleting TOP N orphaned rows in query plan table by joining info from temp table variable
+        -- This is done to speed up delete query. 
+        DELETE TOP (@delete_batch_size) snapshots.notable_query_plan 
+        FROM snapshots.notable_query_plan AS qp , #tmp_notable_query_plan AS tmp
+        WHERE tmp.[sql_handle] = qp.[sql_handle] 
+            AND tmp.plan_handle = qp.plan_handle 
+            AND tmp.plan_generation_num = qp.plan_generation_num 
+            AND tmp.statement_start_offset = qp.statement_start_offset 
+            AND tmp.statement_end_offset = qp.statement_end_offset 
+            AND tmp.creation_time = qp.creation_time
+        
+        SET @rows_affected = @@ROWCOUNT;
+        IF(@rows_affected > 0)
+        BEGIN
+            RAISERROR ('Deleted %d orphaned rows from snapshots.notable_query_plan', 0, 1, @rows_affected) WITH NOWAIT;
+        END
+
+        -- Check if the execution of the stored proc exceeded the @duration specified
+        IF (@duration IS NOT NULL)
+        BEGIN
+            IF (GETUTCDATE()>=@end_time)
+            BEGIN
+                PRINT 'Stopping purge. More than ' + CONVERT(VARCHAR, @duration) + ' minutes passed since the start of operation.';
+                BREAK
+            END
+        END
+
+        -- Check if somebody wanted to stop the purge operation
+        SELECT @stop_purge = COUNT(stop_purge) FROM [core].[purge_info_internal]
+        IF (@stop_purge > 0)
+        BEGIN
+            PRINT 'Stopping purge. Detected a user request to stop purge.';
+            BREAK
+        END
+    END;
+    
+    PRINT 'End purging orphaned records in snapshots.notable_query_plan Current UTC Time:' + CONVERT(VARCHAR, GETUTCDATE())
+END
+
+,1144,68,1076,16760,6038,1144
+  SELECT *
+  FROM [Uat_THPNSW].[dbo].[T_IM_DETAIL] -- where [House_Air_Waybill] in ('CP534951255VN','CP591161763VN')
+ where [Status] = 2
+ order by [Master_Air_Waybill]
+
+
+ /*
+
+
+ [Status] = 1 = 22977 20240410 1745
+[Master_Air_Waybill] = 'ATVIEBTHBKKAACN40027005000172' --
+
+
+
+  update [Uat_THPNSW].[dbo].[T_IM_DETAIL] 
+  set [Id_IM_Control] = null
+		,[Last_Entry] = 'N'
+		,[CTG_TMESTAMP] = null
+  where [House_Air_Waybill] = 'CA349256265AT';
+
+  */,834,468,366,72742,0,1669
+  select * from
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] A
+  where A.Master_Air_Waybill in
+  (
+  
+  SELECT distinct [Master_Air_Waybill]
+  FROM [Uat_THPNSW].[dbo].[T_IM_DETAIL] -- where [House_Air_Waybill] in ('CP534951255VN','CP591161763VN')
+ where [Status] = 2 ) 
+ and A.Status != 2
+ order by [Master_Air_Waybill]
+
+
+ /*
+
+
+ [Status] = 1 = 22977 20240410 1745
+[Master_Air_Waybill] = 'ATVIEBTHBKKAACN40027005000172' --
+
+16935
+
+  update [Uat_THPNSW].[dbo].[T_IM_DETAIL] 
+  set [Id_IM_Control] = null
+		,[Last_Entry] = 'N'
+		,[CTG_TMESTAMP] = null
+  where [House_Air_Waybill] = 'CA349256265AT';
+
+  */,715,3655,-2940,145484,0,715
+  select * from
+  [Uat_THPNSW].[dbo].[T_IM_DETAIL] A
+  where [Master_Air_Waybill] in
+  (
+  
+  SELECT distinct [Master_Air_Waybill]
+  FROM [Uat_THPNSW].[dbo].[T_IM_DETAIL] -- where [House_Air_Waybill] in ('CP534951255VN','CP591161763VN')
+ where [Status] = 2 ) 
+ and A.Status != 2,654,556,98,131854,0,654
+(@1 tinyint)SELECT [dt].[House_Bill_of_Lading] [BARCODE] FROM [T_EX_DETAIL] [dt] WHERE [dt].[Status]=@1,576,671,-95,106548,0,576
+CREATE PROCEDURE [core].[sp_purge_orphaned_notable_query_text]
+    @duration smallint = NULL,
+    @end_time datetime = NULL,
+    @delete_batch_size int = 500
+AS
+BEGIN
+    PRINT 'Begin purging orphaned records in snapshots.notable_query_text Current UTC Time:' + CONVERT(VARCHAR, GETUTCDATE())
+
+    DECLARE @stop_purge int
+
+    -- Delete orphaned rows from snapshots.notable_query_text.  Query texts are not deleted by the generic purge 
+    -- process that deletes other data (above) because query text rows are not tied to a particular snapshot ID. 
+    -- Purging  query text table as a special case, by looking for plans that 
+    -- are no longer referenced by any of the rows in the snapshots.query_stats table.  We need to delete these 
+    -- rows in small chunks, since deleting many GB in a single delete statement would cause lock escalation and 
+    -- an explosion in the size of the transaction log (individual query plans can be 10-50MB).  
+    DECLARE @rows_affected int;
+    -- set expected rows affected as delete batch size
+    SET @rows_affected = @delete_batch_size;
+
+    SELECT qt.[sql_handle]
+    INTO #tmp_notable_query_text
+    FROM snapshots.notable_query_text AS qt
+    WHERE NOT EXISTS (
+        SELECT snapshot_id 
+        FROM snapshots.query_stats AS qs
+        WHERE qs.[sql_handle] = qt.[sql_handle])
+
+    WHILE (@rows_affected = @delete_batch_size)
+    BEGIN
+        -- Deleting TOP N orphaned rows in query text table by joining info from temp table
+        -- This is done to speed up delete query. 
+        DELETE TOP (@delete_batch_size) snapshots.notable_query_text 
+         FROM snapshots.notable_query_text AS qt, #tmp_notable_query_text AS tmp
+        WHERE tmp.[sql_handle] = qt.[sql_handle]
+        
+        SET @rows_affected = @@ROWCOUNT;
+        IF(@rows_affected > 0)
+        BEGIN
+            RAISERROR ('Deleted %d orphaned rows from snapshots.notable_query_text', 0, 1, @rows_affected) WITH NOWAIT;
+        END
+
+        -- Check if the execution of the stored proc exceeded the @duration specified
+        IF (@duration IS NOT NULL)
+        BEGIN
+            IF (GETUTCDATE()>=@end_time)
+            BEGIN
+                PRINT 'Stopping purge. More than ' + CONVERT(VARCHAR, @duration) + ' minutes passed since the start of operation.';
+                BREAK
+            END
+        END
+
+        -- Check if somebody wanted to stop the purge operation
+        SELECT @stop_purge = COUNT(stop_purge) FROM [core].[purge_info_internal]
+        IF (@stop_purge > 0)
+        BEGIN
+            PRINT 'Stopping purge. Detected a user request to stop purge.';
+            BREAK
+        END
+    END;
+
+    PRINT 'End purging orphaned records in snapshots.notable_query_text Current UTC Time:' + CONVERT(VARCHAR, GETUTCDATE())
+
+END
+
+,518,518,0,188120,0,518
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX026552244TH'
+) AS [b],455,455,0,104392,0,455
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR391446425TH'
+) AS [b],452,452,0,104447,0,452
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO163550917TH'
+) AS [b],451,451,0,104429,0,451
+  SELECT *
+  FROM [Uat_THPNSW].[dbo].[T_IM_DETAIL] -- where [House_Air_Waybill] in ('CP534951255VN','CP591161763VN')
+ where [Status] = 1
+ order by [Master_Air_Waybill]
+
+
+ /*
+
+
+ [Status] = 1 = 22977 20240410 1745
+[Master_Air_Waybill] = 'ATVIEBTHBKKAACN40027005000172' --
+
+
+
+  update [Uat_THPNSW].[dbo].[T_IM_DETAIL] 
+  set [Id_IM_Control] = null
+		,[Last_Entry] = 'N'
+		,[CTG_TMESTAMP] = null
+  where [House_Air_Waybill] = 'CA349256265AT';
+
+  */,449,277,172,72742,0,449
+(@1 tinyint)SELECT [dt].[House_Air_Waybill] [BARCODE] FROM [T_IM_DETAIL] [dt] WHERE [dt].[Status]=@1,446,303,143,72465,0,1787
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR378757374TH'
+) AS [b],446,446,0,104429,0,446
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX064344162TH'
+) AS [b],444,444,0,104462,0,444
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE180442603TH'
+) AS [b],442,442,0,104417,0,442
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009542278TH'
+) AS [b],442,442,0,104411,0,442
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP075212091TH'
+) AS [b],439,439,0,104462,0,439
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009542264TH'
+) AS [b],438,438,0,104411,0,438
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007813579TH'
+) AS [b],434,434,0,104403,0,434
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009539852TH'
+) AS [b],433,433,0,104437,0,433
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO273255660TH'
+) AS [b],432,432,0,104426,0,432
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE195869401TH'
+) AS [b],431,431,0,104447,0,431
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX800549412TH'
+) AS [b],431,431,0,104415,0,431
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009214175TH'
+) AS [b],431,431,0,104422,0,431
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP192231147TH'
+) AS [b],431,431,0,104465,0,431
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP189660027TH'
+) AS [b],430,430,0,104396,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009537485TH'
+) AS [b],430,430,0,104437,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO269377534TH'
+) AS [b],430,430,0,104462,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX056949198TH'
+) AS [b],430,430,0,104399,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009545637TH'
+) AS [b],430,430,0,104475,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE171192845TH'
+) AS [b],430,430,0,104475,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR321261849TH'
+) AS [b],430,430,0,104422,0,430
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012189391TH'
+) AS [b],429,429,0,104419,0,429
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE199653493TH'
+) AS [b],429,429,0,104424,0,429
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX800549355TH'
+) AS [b],429,429,0,104415,0,429
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE191085876TH'
+) AS [b],429,429,0,104459,0,429
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP090006640TH'
+) AS [b],428,428,0,104459,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007827122TH'
+) AS [b],428,428,0,104437,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE191451915TH'
+) AS [b],428,428,0,104389,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP062301031TH'
+) AS [b],428,428,0,104429,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR272429041TH'
+) AS [b],428,428,0,104392,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP066014314TH'
+) AS [b],428,428,0,104465,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009544115TH'
+) AS [b],428,428,0,104437,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO205725792TH'
+) AS [b],428,428,0,104392,0,428
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009207342TH'
+) AS [b],427,427,0,104475,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX049157026TH'
+) AS [b],427,427,0,104465,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP064500485TH'
+) AS [b],427,427,0,104444,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX066805030TH'
+) AS [b],427,427,0,104457,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009546059TH'
+) AS [b],427,427,0,104475,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012190275TH'
+) AS [b],427,427,0,104480,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007830206TH'
+) AS [b],427,427,0,104447,0,427
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR336184750TH'
+) AS [b],426,426,0,104406,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012186126TH'
+) AS [b],426,426,0,104437,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009212665TH'
+) AS [b],426,426,0,104437,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'EE193903198TH'
+) AS [b],426,426,0,104422,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009540232TH'
+) AS [b],426,426,0,104475,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO304972628TH'
+) AS [b],426,426,0,104465,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR365651701TH'
+) AS [b],426,426,0,104424,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP075212057TH'
+) AS [b],426,426,0,104462,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX049157030TH'
+) AS [b],426,426,0,104465,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009533758TH'
+) AS [b],426,426,0,104437,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009545985TH'
+) AS [b],426,426,0,104440,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007294750TH'
+) AS [b],426,426,0,104412,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'UF000767565TH'
+) AS [b],426,426,0,104409,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007830047TH'
+) AS [b],426,426,0,104440,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009213802TH'
+) AS [b],426,426,0,104475,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007828074TH'
+) AS [b],426,426,0,104475,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP192231297TH'
+) AS [b],426,426,0,104468,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012185284TH'
+) AS [b],426,426,0,104475,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012187095TH'
+) AS [b],426,426,0,104437,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX049913666TH'
+) AS [b],426,426,0,104424,0,426
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007829123TH'
+) AS [b],425,425,0,104437,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO143426062TH'
+) AS [b],425,425,0,104472,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012189003TH'
+) AS [b],425,425,0,104440,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009546014TH'
+) AS [b],425,425,0,104440,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009542383TH'
+) AS [b],425,425,0,104183,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009213572TH'
+) AS [b],425,425,0,104440,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX081621064TH'
+) AS [b],425,425,0,104277,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009545892TH'
+) AS [b],425,425,0,104419,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR391446310TH'
+) AS [b],425,425,0,104447,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012190752TH'
+) AS [b],425,425,0,104447,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009214255TH'
+) AS [b],425,425,0,104422,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP065613360TH'
+) AS [b],425,425,0,104465,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012190315TH'
+) AS [b],425,425,0,104480,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RR349821937TH'
+) AS [b],425,425,0,104429,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'RO120317308TH'
+) AS [b],425,425,0,104432,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009212095TH'
+) AS [b],425,425,0,104411,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX012190148TH'
+) AS [b],425,425,0,104459,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX043565870TH'
+) AS [b],425,425,0,104475,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LX009533996TH'
+) AS [b],425,425,0,104437,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP007830268TH'
+) AS [b],425,425,0,104447,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP117724893TH'
+) AS [b],425,425,0,104440,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP009214272TH'
+) AS [b],425,425,0,104480,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP192209118TH'
+) AS [b],425,425,0,104435,0,425
+SELECT TOP(1) [b].[House_Bill_of_Lading]
+FROM (
+    SELECT EX.[House_Bill_of_Lading]
+                            FROM [Uat_THPNSW].[dbo].[T_EX_DETAIL] EX
+                            WHERE EX.[House_Bill_of_Lading] = 'LP024146481TH'
+) AS [b],425,425,0,104450,0,425

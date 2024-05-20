@@ -1,0 +1,18 @@
+﻿ASPState,ASPState,Data File(s),470,D:\ASPState\ASPState.mdf
+ASPState,ASPState_log,Log File(s),0,D:\ASPState\ASPState_1.LDF
+GewinnGICS,GewinnGICS2,Data File(s),349,D:\GewinnSoft\Database\GewinnGICS.mdf
+GewinnGICS,GewinnGICS2_log,Log File(s),17,D:\GewinnSoft\Database\GewinnGICS_1.ldf
+GewinnGRMS,gewinnGRMSDEV,Data File(s),181,D:\GewinnSoft\Database\GewinnGRMS.mdf
+GewinnGRMS,gewinnGRMSDEV_log,Log File(s),1,D:\GewinnSoft\Database\GewinnGRMS_1.ldf
+GewinnPortal,gewinnPortalDEV,Data File(s),17,D:\GewinnSoft\Database\GewinnPortal.mdf
+GewinnPortal,gewinnPortalDEV_log,Log File(s),1,D:\GewinnSoft\Database\GewinnPortal_1.ldf
+ManageWarehouse,ManageWarehouse,Data File(s),41600,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\ManageWarehouse.mdf
+ManageWarehouse,ManageWarehouse_log,Log File(s),760,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\ManageWarehouse_log.ldf
+master,master,Data File(s),4,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),1,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\mastlog.ldf
+model,modeldev,Data File(s),2,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),38,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),508,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),14,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\MSDBLog.ldf
+tempdb,tempdev,Data File(s),8,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\tempdb.mdf
+tempdb,templog,Log File(s),0,F:\Program Files\Microsoft SQL Server\MSSQL10_50.RISK\MSSQL\DATA\templog.ldf

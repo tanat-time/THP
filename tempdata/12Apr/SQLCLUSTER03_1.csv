@@ -1,0 +1,16 @@
+﻿master,master,Data File(s),5,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),2,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\mastlog.ldf
+MDW_RFID,MDW_RFID,Data File(s),9950,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_RFID.mdf
+MDW_RFID,MDW_RFID_log,Log File(s),510,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_RFID_log.ldf
+model,modeldev,Data File(s),4,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),14,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),14240,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),344,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\MSDBLog.ldf
+POST_RFID,POST-RFID-TOEY,Data File(s),1104,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\POST_RFID.mdf
+POST_RFID,POST-RFID-TOEY_log,Log File(s),56,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\POST_RFID_log.ldf
+RFID,RFID,Data File(s),5,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\RFID.mdf
+RFID,RFID_log,Log File(s),6,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\RFID_log.ldf
+RFID_FAULT,RFID_FAILT,Data File(s),279,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\RFID_FAILT.mdf
+RFID_FAULT,RFID_FAILT_log,Log File(s),1,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\RFID_FAILT_log.ldf
+tempdb,tempdev,Data File(s),8,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\tempdb.mdf
+tempdb,templog,Log File(s),0,C:\ClusterStorage\Database\MSSQL12.RFID\MSSQL\DATA\templog.ldf

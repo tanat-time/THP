@@ -1,0 +1,17 @@
+﻿CAPOS_BR_DEV,CAPOS_BR_DEV,Data File(s),60090,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_BR_DEV_Data.MDF
+CAPOS_BR_DEV,CAPOS_BR_DEV2,Data File(s),100,C:\ClusterStorage\Database5\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_BR_DEV2.ndf
+CAPOS_BR_DEV,CAPOS_BR_DEV_log,Log File(s),1918,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_BR_DEV_Log.LDF
+CAPOS_BR_PRELOAD,CAPOS_BR_DEV,Data File(s),1372,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_BR_PRELOAD.mdf
+CAPOS_BR_PRELOAD,CAPOS_BR_DEV_log,Log File(s),2,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_BR_PRELOAD_0.ldf
+CAPOS_PL_LIVE,CAPOS_BR_DEV,Data File(s),1372,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_PL_LIVE.mdf
+CAPOS_PL_LIVE,CAPOS_BR_DEV_log,Log File(s),2,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\CAPOS_PL_LIVE_0.ldf
+master,master,Data File(s),5,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),2,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\mastlog.ldf
+MDW_NEWCA,MDW_NEWCA,Data File(s),10100,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_NEWCA.mdf
+MDW_NEWCA,MDW_NEWCA_log,Log File(s),1420,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_NEWCA_log.ldf
+model,modeldev,Data File(s),4,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),9,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),29455,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),459,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\MSDBLog.ldf
+tempdb,tempdev,Data File(s),8,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\tempdb.mdf
+tempdb,templog,Log File(s),0,C:\ClusterStorage\Database\MSSQL12.NEWCA\MSSQL\DATA\templog.ldf

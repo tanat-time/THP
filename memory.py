@@ -1,7 +1,7 @@
 import pandas as pd
 import docx
 from fnreadfilename import readfilesname
-path = '10Mar'
+path = '/Users/admin/Documents/Time/THP 2023-2024/12Apr'
 x = readfilesname(path)
 print(x)
 a=0

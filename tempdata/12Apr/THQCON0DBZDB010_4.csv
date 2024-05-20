@@ -1,0 +1,823 @@
+﻿select * from emo_list
+where cashed_pstcde_id = 0 --and from_pstcde_id <> 0 --order by 1,428172,247,427925,4291,0,2140861
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and sender_name like '%บัวภา%ชินเกตุ%' ) as a where a.rowrunning BETWEEN 1 AND 25,20292,20290,2,566952,0,20292
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 451 AND 475,11946,11738,208,575955,0,11946
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 76 AND 100,11747,11746,1,566002,0,11747
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 626 AND 650,11571,11163,408,578570,0,11571
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 126 AND 150,11549,11309,240,567352,0,11549
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 401 AND 425,11452,11018,434,574706,0,11452
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 526 AND 550,11371,11371,0,577556,0,11371
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 601 AND 625,11366,11200,166,578552,0,11366
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 376 AND 400,11194,11031,163,574248,0,11194
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 326 AND 350,11156,11156,0,572901,0,11156
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 576 AND 600,11138,11068,70,578528,0,11138
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 651 AND 675,11134,10949,185,578588,0,11134
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 501 AND 525,11131,11131,0,576844,0,11131
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 201 AND 225,11108,11108,0,569479,0,11108
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 101 AND 125,11077,11077,0,566637,0,11077
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 426 AND 450,11042,11042,0,575256,0,11042
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 26 AND 50,11037,10988,49,564546,0,11037
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 351 AND 375,11035,11034,1,573688,0,11035
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 151 AND 175,11025,11025,0,568023,0,11025
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 51 AND 75,10944,10944,0,565312,0,10944
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 476 AND 500,10915,10915,0,576146,0,10915
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 301 AND 325,10875,10875,0,572170,0,10875
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 551 AND 575,10856,10856,0,578085,0,10856
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 276 AND 300,10850,10850,0,571395,0,10850
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 1 AND 25,10838,10837,1,563930,0,10838
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 226 AND 250,10827,10827,0,570166,0,10827
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 176 AND 200,10825,10825,0,568760,0,10825
+select * from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a where a.rowrunning BETWEEN 251 AND 275,10776,10775,1,570747,0,10776
+
+CREATE         PROCEDURE [dbo].[lock_data_emo_list_more4] AS
+DECLARE @Error INT
+SET NOCOUNT OFF
+DECLARE @rt int
+
+-- update emo_list set emo_reserver = 99998,emo_reserve_dte_tme = '01 jan 2100 00:00:00'
+-- where cashed_pstcde_id = 0 and
+--(emo_status2 is null or emo_status3 is null) 
+--and (EMO_STATUS5 is null and EMO_STATUS6 is null) ----add 28/11/2559
+--and emo_reserver is null
+--and emo_reserve_dte_tme is null 
+--and DATEADD(Month, 4, convert(varchar,substring(emo_nbr,7,6),111)) < getdate()
+
+
+--update  emo_list set emo_reserver = 99998,emo_reserve_dte_tme = '01 jan 2100 00:00:00'
+--where cashed_pstcde_id = 0 and
+--(emo_status2 is null or emo_status3 is null) 
+--and (EMO_STATUS5 is not null or EMO_STATUS6 is not null) ----add 28/11/2559
+--and emo_reserver is null
+--and emo_reserve_dte_tme is null 
+--and DATEADD(Month, 20, convert(varchar,substring(emo_nbr,7,6),111)) < getdate()
+
+--datediff(month,convert(varchar,substring(emo_nbr,7,6),111),getdate()) > 4
+--commit
+
+--lock 4 month
+ update emo_list 
+ set emo_reserver = 99998,emo_reserve_dte_tme = '01 jan 2100 00:00:00'
+ where cashed_pstcde_id = 0 and
+(emo_status2 is null or emo_status3 is null) and
+((emo_reserver is null and emo_reserve_dte_tme is null ) or (emo_reserver = 0 and EMO_STATUS8 is null)) and
+convert(varchar(4),DATEADD(Month, 4, emo_status1),12) < convert(varchar(4),DATEADD(Month, 0, GETDATE()),12) and
+emo_nbr not in (select emo_nbr from EMO_LIST_TANACHART)
+
+--unlock Thanachart 4 month because new ca lock 4 month but tanachart lock 6 month
+ update emo_list 
+ set emo_reserver = 0,emo_reserve_dte_tme = getdate(),EMO_STATUS8 = getdate()
+ where cashed_pstcde_id = 0 and
+(emo_status2 is null or emo_status3 is null) and
+convert(varchar(4),DATEADD(Month, 4, emo_status1),12) < convert(varchar(4),DATEADD(Month, 0, GETDATE()),12) and
+emo_nbr in (select emo_nbr from EMO_LIST_TANACHART)
+
+--lock Thanachart and move 6 month
+update emo_list 
+set emo_reserver = 99998,emo_reserve_dte_tme = '01 jan 2100 00:00:00'
+where cashed_pstcde_id = 0 and
+(emo_status2 is null or emo_status3 is null) and
+convert(varchar(4),DATEADD(Month, 6, emo_status1),12) < convert(varchar(4),DATEADD(Month, 0, GETDATE()),12) and
+emo_nbr in (select emo_nbr from EMO_LIST_TANACHART)
+
+insert into [dbo].[EMO_LIST_EXPIRED_TANACHAT]
+select * from emo_list
+where cashed_pstcde_id = 0 and
+(emo_status2 is null or emo_status3 is null) and
+convert(varchar(4),DATEADD(Month, 6, emo_status1),12) < convert(varchar(4),DATEADD(Month, 0, GETDATE()),12) and
+emo_nbr in (select emo_nbr from EMO_LIST_TANACHART)
+
+SET @rt = @@ROWCOUNT
+if (@rt > 0) 
+	 BEGIN
+	      delete from emo_list
+		  where cashed_pstcde_id = 0 and
+		  (emo_status2 is null or emo_status3 is null) and
+		  convert(varchar(4),DATEADD(Month, 6, emo_status1),12) < convert(varchar(4),DATEADD(Month, 0, GETDATE()),12) and
+		  emo_nbr in (select emo_nbr from EMO_LIST_TANACHART)
+	 END
+
+
+
+
+
+--เดือนที่หมดอายุ < เดือนที่รัน job
+--run job ทุกวันที่ 1 ของเดือน เวลา 00.01 น.
+
+
+,9782,9749,33,674446,478,9782
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[unlock_data_emo_list_unlocked]
+AS
+DECLARE @Error INT;
+BEGIN
+	update emo_list set EMO_STATUS8 = GETDATE()
+	where EMO_STATUS8 is not null 
+	and EMO_STATUS9 is null 
+	and CASHED_PSTCDE_ID =0 and (EMO_RESERVER is null or EMO_RESERVER = 0)
+
+	update emo_list set EMO_STATUS8 = GETDATE()
+	where EMO_STATUS8 is not null 
+	and (EMO_STATUS8>EMO_STATUS9 ) 
+	and CASHED_PSTCDE_ID =0 and (EMO_RESERVER is null or EMO_RESERVER = 0)
+END
+,9780,33,9747,4548,0,9780
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240418' and '240418' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240418' and '240418'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240418' and '240418' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240418' and '240418' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '1%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),9188,39737,-30549,5882670,0,18377
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%วุฒิศักดิ์ หนูพัน%' ,8167,99,8068,4217,0,32668
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%สมเพียร%' ,8043,114,7929,5061,0,40215
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240412' and '240416' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240412' and '240416'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240412' and '240416' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240412' and '240416' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '1%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),7367,38155,-30788,5882617,0,22102
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%เสาธง%' ,6583,109,6474,4279,0,19750
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240419' and '240421' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240419' and '240421'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240419' and '240421' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240419' and '240421' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '1%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),6565,39529,-32964,6027531,0,6565
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%เชียนแ%' ,6264,99,6165,4203,0,31322
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%บุญมี เสาธง%' ,5597,97,5500,4220,0,22389
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ศรชัย สูงพิมาย%' ,4563,96,4467,4024,0,9127
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240418' and '240418' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240418' and '240418'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240418' and '240418' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240418' and '240418' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '4%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),4213,37893,-33680,5882876,0,8427
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240422' and '240422' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240422' and '240422'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240422' and '240422' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240422' and '240422' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '1%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),4200,39604,-35404,6025575,0,8401
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%นันทา ดาวเรือง%' ,3946,98,3848,4683,0,3946
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240419' and '240421' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240419' and '240421'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240419' and '240421' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240419' and '240421' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '4%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),3924,38494,-34570,5894940,0,3924
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%สมจิตร จำนงค์ทอง%' ,3882,110,3772,4685,0,7764
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240417' and '240417' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240417' and '240417'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240417' and '240417' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240417' and '240417' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '1%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),3814,37346,-33532,5884266,0,15257
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240422' and '240422' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240422' and '240422'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240422' and '240422' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240422' and '240422' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '4%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),3742,38517,-34775,5895090,0,3742
+select ro ,pstcde,PSTCDE_FR_DSC, count(*) AS CASHED_CNT, sum(emo_amount) AS CASHED_AMT, '' as ISSUED_CNT,''  AS ISSUED_AMT,'' AS ISSUED_FEE, cashed_date as sdate, SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) as emo_type, 'daily' as report_type from (select t.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_EMO_LIST_NEWCA t where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240401' and '240416' union all select tt.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_EMO_LIST_NEWCA tt where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240401' and '240416'  union all select c.*,CONVERT(nvarchar(6), EMO_STATUS2, 12) as cashed_date from VW_CASHED_EMO_LIST c where CONVERT(nvarchar(6), EMO_STATUS2, 12) between '240401' and '240416' union all select cc.*,CONVERT(nvarchar(6), EMO_STATUS3, 12) as cashed_date from VW_CASHED_EMO_LIST cc where CONVERT(nvarchar(6), EMO_STATUS3, 12) between '240401' and '240416' ) v left join PSTCDE on (PSTCDE_ID = CASHED_PSTCDE_ID)  where emo_type like '1%' group by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1) order by cashed_date, ro ,pstcde,PSTCDE_FR_DSC,SUBSTRING(CAST(emo_type AS varchar(3)), 1, 1),3679,37984,-34305,5883386,0,14718
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%เขื่อนโพธิ์%' ,3640,116,3524,4994,0,32760
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%แซ่เต๋อว%' ,3445,120,3325,5299,0,17228
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%อุดม ตรีเดช%' ,3431,114,3317,4258,0,13724
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%สิราวุฒิ%' ,3418,100,3318,4322,0,6836
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%แบล็ค%' ,3408,101,3307,4712,0,3408
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '% ตาก%' ,3190,106,3084,4768,0,3190
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%กันหา ศรี%' ,3169,112,3057,5014,0,9508
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%หิรัญพานิช%' ,3139,137,3002,5014,0,3139
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ประปาพิมาย%' ,3041,112,2929,4647,0,30412
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ด็อกเตอร์ เจล%' ,2862,107,2755,4025,0,5724
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%สมบัติ จำ%' ,2861,105,2756,3636,0,8585
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%นันท์ศนิ%' ,2810,109,2701,4770,0,8431
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%บุญมี%' ,2742,99,2643,4176,0,16457
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%บุญเสนอ%' ,2609,107,2502,4732,0,13046
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ยุรี%' ,2460,104,2356,4265,0,4921
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ชัยเลิศ%' ,2435,109,2326,4358,0,4871
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%วัลชัย%' ,2252,102,2150,4287,0,4504
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%พนิดา พูนทอง%' ,2029,130,1899,3637,0,4058
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ยุทธนา จีระพรต%' ,1996,113,1883,4703,0,1996
+select * from V_TransactionDaily_Wallet t where CONVERT(nvarchar(6), EMO_AUDIT_DTE_TME,12) between '240422' and '240422' order by EMO_AUDIT_DTE_TME,1978,20481,-18503,604136,8,1978
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%สุริยา ฤทธาพรม%' ,1921,103,1818,4228,0,3843
+SELECT emo_nbr AS POST_REF, RECV_NAME = case substring(receiver_name,1,2) when '()' then substring(receiver_name,3,len(receiver_name)) else receiver_name end,replace(case isnull(receiver_tel,'') when '' then '' else rtrim(receiver_tel) end,'-','') RECV_PHONE_NUMBER,dbo.fr_post_id(dest_pstcde_id) AS RECV_ZIP,dbo.fr_post_name(dest_pstcde_id) AS RECV_POST_NAME,emo_amount AS AMOUNT,SEND_NAME = case substring(sender_name,1,2) when '()' then substring(sender_name,3,len(sender_name)) else sender_name end,replace(case isnull(sender_tel,'') when '' then '' else rtrim(sender_tel) end,'-','') SEND_PHONE_NUMBER,dbo.fr_post_id(from_pstcde_id) AS SEND_ZIP,dbo.fr_post_name(from_pstcde_id) AS SEND_POST_NAME,'3' AS TR_TYPE,convert(varchar,emo_status1,120) AS TR_DATE,convert(varchar,emo_status1,120) AS SEND_DATE FROM emo_list where emo_type in (401,403,405) and emo_status1 is not null and receiver_tel is not null and receiver_tel <> '' and receiver_tel <> '!RECEIVER_TEL' and convert(varchar,emo_status1,120) between '2024-04-22 14:46' and '2024-04-22 14:48' ,1889,21,1868,4751,0,1889
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ธงชัย จงช่วยวงศ์%' ,1886,111,1775,4643,0,3773
+select * from V_TransactionDaily_Wallet t where CONVERT(nvarchar(6), EMO_AUDIT_DTE_TME,12) between '240419' and '240421' order by EMO_AUDIT_DTE_TME,1886,20240,-18354,603413,15,1886
+select count(*) as transCount from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and sender_name like '%บัวภา%ชินเกตุ%' ) as a,1865,22449,-20584,581368,0,1865
+SELECT emo_nbr AS POST_REF, RECV_NAME = case substring(receiver_name,1,2) when '()' then substring(receiver_name,3,len(receiver_name)) else receiver_name end,replace(case isnull(receiver_tel,'') when '' then '' when '!RECEIVER_TEL' then '' else rtrim(receiver_tel) end,'-','') RECV_PHONE_NUMBER,dbo.fr_post_id(cashed_pstcde_id) AS RECV_ZIP,dbo.fr_post_name(cashed_pstcde_id) AS RECV_POST_NAME,emo_amount AS AMOUNT,SEND_NAME = case substring(sender_name,1,2) when '()' then substring(sender_name,3,len(sender_name)) else sender_name end,replace(case isnull(sender_tel,'') when '' then '' else rtrim(sender_tel) end,'-','') SEND_PHONE_NUMBER,dbo.fr_post_id(from_pstcde_id) AS SEND_ZIP,dbo.fr_post_name(from_pstcde_id) AS SEND_POST_NAME,'4' AS TR_TYPE,convert(varchar,emo_status2,120) AS TR_DATE,convert(varchar,emo_status2,120) AS SEND_DATE FROM emo_list where emo_type in (401,403,405) and (sender_tel is not null) and (sender_tel <> '') and (sender_tel <> '!SENDER_TEL') and emo_status2 is not null and convert(varchar,emo_status2,120) between '2024-04-22 15:01' and '2024-04-22 15:06' ,1645,15,1630,4761,0,1645
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%จรูญ บัวจี๋%' ,1590,114,1476,4455,0,7951
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240422' and '240423' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '41000') order by emo_nbr,1574,4601,-3027,580611,0,1574
+SELECT emo_nbr AS POST_REF, RECV_NAME = case substring(receiver_name,1,2) when '()' then substring(receiver_name,3,len(receiver_name)) else receiver_name end,replace(case isnull(receiver_tel,'') when '' then '' else rtrim(receiver_tel) end,'-','') RECV_PHONE_NUMBER,dbo.fr_post_id(dest_pstcde_id) AS RECV_ZIP,dbo.fr_post_name(dest_pstcde_id) AS RECV_POST_NAME,emo_amount AS AMOUNT,SEND_NAME = case substring(sender_name,1,2) when '()' then substring(sender_name,3,len(sender_name)) else sender_name end,replace(case isnull(sender_tel,'') when '' then '' else rtrim(sender_tel) end,'-','') SEND_PHONE_NUMBER,dbo.fr_post_id(from_pstcde_id) AS SEND_ZIP,dbo.fr_post_name(from_pstcde_id) AS SEND_POST_NAME,'3' AS TR_TYPE,convert(varchar,emo_status1,120) AS TR_DATE,convert(varchar,emo_status1,120) AS SEND_DATE FROM emo_list where emo_type in (401,403,405) and emo_status1 is not null and receiver_tel is not null and receiver_tel <> '' and receiver_tel <> '!RECEIVER_TEL' and convert(varchar,emo_status1,120) between '2024-04-22 14:12' and '2024-04-22 14:14' ,1531,23,1508,4718,0,1531
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240422' and '240423' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '40270') order by emo_nbr,1519,4587,-3068,580310,0,1519
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%.ตาก%' ,1509,101,1408,4768,0,1509
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240417' and '240418' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '66110') order by emo_nbr,1471,4235,-2764,585314,0,4415
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%หน.ปจ.นครปฐม%' ,1464,102,1362,4441,0,14647
+select *  from VW_EMO_LIST_NEWCA WHERE EMO_NBR = '30715724041009147969' AND (EMO_RESERVER IS NULL OR EMO_RESERVER = 0 )
+				AND TRNSTN_NBR2 IS  NULL AND EMO_STATUS2 IS  NULL
+				AND TRNSTN_NBR3 IS  NULL AND EMO_STATUS3 IS  NULL
+				AND CASHED_PSTCDE_ID=0 ,1434,0,1434,7,0,1434
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%รณชัย%' ,1353,105,1248,4121,0,6765
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240422' and '240423' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '40120') order by emo_nbr,1349,4716,-3367,581391,0,1349
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%สมฤทัย%' ,1303,109,1194,4635,0,19556
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%00700324041808519862%' ,1274,114,1160,4680,0,1274
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ชัชรินทร์%' ,1221,104,1117,4485,0,7327
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%นิศากร กล้าหาญ%' ,1192,98,1094,4188,0,3577
+SELECT emo_nbr AS POST_REF, RECV_NAME = case substring(receiver_name,1,2) when '()' then substring(receiver_name,3,len(receiver_name)) else receiver_name end,replace(case isnull(receiver_tel,'') when '' then '' else rtrim(receiver_tel) end,'-','') RECV_PHONE_NUMBER,dbo.fr_post_id(dest_pstcde_id) AS RECV_ZIP,dbo.fr_post_name(dest_pstcde_id) AS RECV_POST_NAME,emo_amount AS AMOUNT,SEND_NAME = case substring(sender_name,1,2) when '()' then substring(sender_name,3,len(sender_name)) else sender_name end,replace(case isnull(sender_tel,'') when '' then '' else rtrim(sender_tel) end,'-','') SEND_PHONE_NUMBER,dbo.fr_post_id(from_pstcde_id) AS SEND_ZIP,dbo.fr_post_name(from_pstcde_id) AS SEND_POST_NAME,'3' AS TR_TYPE,convert(varchar,emo_status1,120) AS TR_DATE,convert(varchar,emo_status1,120) AS SEND_DATE FROM emo_list where emo_type in (401,403,405) and emo_status1 is not null and receiver_tel is not null and receiver_tel <> '' and receiver_tel <> '!RECEIVER_TEL' and convert(varchar,emo_status1,120) between '2024-04-22 14:58' and '2024-04-22 15:06' ,1189,23,1166,4753,0,1189
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240417' and '240418' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '09183') order by emo_nbr,1182,4729,-3547,579624,0,1182
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%หน.ปณ.%' ,1142,105,1037,4408,0,1142
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[update_emo_audit_dte_tme]
+	
+AS
+BEGIN
+	------------------------------------------------------------------------------------------
+--1. วันที่เครื่องผิด ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+----------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--2. มาส่วนกลางช้า 1 เดือน ให้เชื่อ emo_nbr (DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME))
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--3. วันที่ emo_audit ผิด (พ.ศ.) ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')	
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')			
+----------------------------------------------------------------------------------------
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--4. มาส่วนกลางช้า 1-60 วัน ให้เชื่อ emo_nbr 
+--select * 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+--------------------------------------------------------------------------------------
+
+
+END
+,1104,13366,-12262,580351,0,17665
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240417' and '240418' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '73170') order by emo_nbr,1096,4121,-3025,585314,0,3288
+SELECT EMO_NBR,emo_amount,SENDER_NAME,RECEIVER_NAME,CONVERT( VARCHAR, EMO_STATUS1, 120) as EMO_STATUS1,STATUS,frm_post,dst_post  FROM VW_EMO_WALLET_SEARCH  where   RECEIVER_NAME like '%ไพรัช มั่น%'   and EMO_TYPE ='405' ,1056,13,1043,4340,0,1056
+select EMO_NBR,emo_amount,convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) as sdate,PSTCDE as dst_pstcde,EMO_TYPE,SENDER_NAME,RECEIVER_NAME from VW_EMO_LIST_NEWCA,pstcde where dest_pstcde_id = pstcde_id and convert(nvarchar(6),EMO_AUDIT_DTE_TME,12) between '240422' and '240423' and EMO_TYPE like '1%' and FROM_PSTCDE_ID in(select PSTCDE_id from PSTCDE where PSTCDE = '00358') order by emo_nbr,1023,4856,-3833,583642,0,1023
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[update_emo_audit_dte_tme]
+	
+AS
+BEGIN
+	------------------------------------------------------------------------------------------
+--1. วันที่เครื่องผิด ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+----------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--2. มาส่วนกลางช้า 1 เดือน ให้เชื่อ emo_nbr (DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME))
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--3. วันที่ emo_audit ผิด (พ.ศ.) ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')	
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')			
+----------------------------------------------------------------------------------------
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--4. มาส่วนกลางช้า 1-60 วัน ให้เชื่อ emo_nbr 
+--select * 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+--------------------------------------------------------------------------------------
+
+
+END
+,1020,12563,-11543,585325,0,16321
+select count(*) as transCount from (select ROW_NUMBER() OVER(ORDER BY emo_nbr ASC) as rowrunning,emo_nbr,emo_amount,ty.emo_type + ':' + ty.emo_type_name as emo_type,sender_name,receiver_name,frm_region.region_name as frm_ro,frm.pstcde + ':' + frm.pstcde_fr_dsc as frm_pstcde,case when cashed_pstcde_id = 0 then dst_region.region_name else csh_region.region_name end as dst_ro,case when cashed_pstcde_id = 0 then dst.pstcde + ':' + dst.pstcde_fr_dsc else csh.pstcde + ':' + csh.pstcde_fr_dsc end as dst_pstcde,''''+convert(varchar,emo_status1,103)+' '+convert(varchar(5),emo_status1,114) as emo_status1,''''+convert(varchar,emo_status2,103)+' '+convert(varchar(5),emo_status2,114) as emo_status2,''''+convert(varchar,emo_status3,103)+' '+convert(varchar(5),emo_status3,114) as emo_status3,''''+convert(varchar,EMO_AUDIT_DTE_TME,103)+' '+convert(varchar(5),EMO_AUDIT_DTE_TME,114) as EMO_AUDIT_DTE_TME,remark from (SELECT [EMO_NBR],[FROM_PSTCDE_ID],[DEST_PSTCDE_ID],[CASHED_PSTCDE_ID],[SENDER_NAME],[SENDER_ADDRESS],[RECEIVER_NAME],[RECEIVER_ADDRESS],[SENDER_REMARK],[EMO_TYPE],[RECEIVER_TEL],[EMO_AMOUNT],[EMO_ISSUED_FEE],[EMO_ISSUED_FEE_VAT],[EMO_CASHED_FEE],[EMO_CASHED_FEE_VAT],[EMO_RESERVER],[EMO_RESERVE_DTE_TME],[TRNSTN_NBR1],[EMO_STATUS1],[TRNSTN_NBR2],case when emo_nbr in('00700320020717072280','00700320020717253514','00700320021117137484','00700320021117137491','00700320021117489338') then convert(datetime, '2020-08-31 '+convert(varchar(5),emo_status2,108) , 120) when emo_nbr in('00700320011717141910','00700320011918433306','00700320011919583544','00700320011921405589','00700320011921545855','00700320011921545856','00700320011922186893','00700320011922257170','00700320011922267244') then convert(datetime, '2020-07-31 '+convert(varchar(5),emo_status2,108) , 120)else [EMO_STATUS2]end as[EMO_STATUS2],[TRNSTN_NBR3],[EMO_STATUS3],[TRNSTN_NBR4],[EMO_STATUS4],[TRNSTN_NBR5],[EMO_STATUS5],[TRNSTN_NBR6],[EMO_STATUS6],[TRNSTN_NBR7],[EMO_STATUS7],[TRNSTN_NBR8],[EMO_STATUS8],[TRNSTN_NBR9],[EMO_STATUS9],[EMO_ISSUED_REMARK],[EMO_CASHED_REMARK],[DEST_GET_FLAG],[EMO_ISSUED_FEE_DETAIL],[EMO_AUDITOR],[EMO_AUDIT_DTE_TME],[EMO_ONLINE_FLAG],[SENDER_TEL],'' as expired_date,'' as remark FROM [emo].[dbo].[VW_EMO_LIST_NEWCA]) t left join (select * from pstcde) frm on t.FROM_PSTCDE_ID = frm.pstcde_id left join (select * from pstcde where pstcde <> 0) dst on t.DEST_PSTCDE_ID = dst.pstcde_id left join (select * from pstcde where pstcde <> 0) csh on t.CASHED_PSTCDE_ID = csh.pstcde_id left join emo_type ty on t.emo_type = ty.emo_type left join (select * from region) frm_region on frm.RO = frm_region.region left join (select * from region) dst_region on dst.RO = dst_region.region left join (select * from region) csh_region on csh.RO = csh_region.region where 1 = 1 and (CONVERT(nvarchar(6), EMO_STATUS2,12) between '240423' and '240423' or CONVERT(nvarchar(6), EMO_STATUS3,12) between '240423' and '240423') ) as a,975,13339,-12364,588889,0,26339
+SELECT emo_nbr AS POST_REF, RECV_NAME = case substring(receiver_name,1,2) when '()' then substring(receiver_name,3,len(receiver_name)) else receiver_name end,replace(case isnull(receiver_tel,'') when '' then '' else rtrim(receiver_tel) end,'-','') RECV_PHONE_NUMBER,dbo.fr_post_id(dest_pstcde_id) AS RECV_ZIP,dbo.fr_post_name(dest_pstcde_id) AS RECV_POST_NAME,emo_amount AS AMOUNT,SEND_NAME = case substring(sender_name,1,2) when '()' then substring(sender_name,3,len(sender_name)) else sender_name end,replace(case isnull(sender_tel,'') when '' then '' else rtrim(sender_tel) end,'-','') SEND_PHONE_NUMBER,dbo.fr_post_id(from_pstcde_id) AS SEND_ZIP,dbo.fr_post_name(from_pstcde_id) AS SEND_POST_NAME,'3' AS TR_TYPE,convert(varchar,emo_status1,120) AS TR_DATE,convert(varchar,emo_status1,120) AS SEND_DATE FROM emo_list where emo_type in (401,403,405) and emo_status1 is not null and receiver_tel is not null and receiver_tel <> '' and receiver_tel <> '!RECEIVER_TEL' and convert(varchar,emo_status1,120) between '2024-04-22 14:48' and '2024-04-22 14:50' ,955,26,929,4726,0,955
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[update_emo_audit_dte_tme]
+	
+AS
+BEGIN
+	------------------------------------------------------------------------------------------
+--1. วันที่เครื่องผิด ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+----------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--2. มาส่วนกลางช้า 1 เดือน ให้เชื่อ emo_nbr (DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME))
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--3. วันที่ emo_audit ผิด (พ.ศ.) ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')	
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')			
+----------------------------------------------------------------------------------------
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--4. มาส่วนกลางช้า 1-60 วัน ให้เชื่อ emo_nbr 
+--select * 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+--------------------------------------------------------------------------------------
+
+
+END
+,952,12751,-11799,580715,0,15236
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[update_emo_audit_dte_tme]
+	
+AS
+BEGIN
+	------------------------------------------------------------------------------------------
+--1. วันที่เครื่องผิด ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' and EMO_TYPE not like '1%'
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      not in('0','1')	--0 คือ emo_nbr = EMO_STATUS1 / 1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12)) not in('0')
+----------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--2. มาส่วนกลางช้า 1 เดือน ให้เชื่อ emo_nbr (DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME))
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = DATEADD(MONTH,-1,EMO_AUDIT_DTE_TME)
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      =1			--1 คือ emo_nbr < EMO_STATUS1 แค่ 1 เดือน
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--3. วันที่ emo_audit ผิด (พ.ศ.) ให้เชื่อ emo_status1
+--select emo_nbr,EMO_STATUS1,EMO_AUDIT_DTE_TME,DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_STATUS3,12))
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+--and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+
+--emo_list0
+insert into emo_list0
+select *
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')				
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')	
+
+update emo_list
+set EMO_AUDIT_DTE_TME = EMO_STATUS1
+where emo_nbr not like '007%' 
+and   DATEDIFF(MONTH,SUBSTRING(emo_nbr,7,6),             convert(nvarchar(6),EMO_STATUS1,12))      =0	--0 คือ emo_nbr = EMO_STATUS1
+and   DATEDIFF(MONTH,convert(nvarchar(6),EMO_STATUS1,12),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')			
+----------------------------------------------------------------------------------------
+
+
+
+
+
+------------------------------------------------------------------------------------------
+--4. มาส่วนกลางช้า 1-60 วัน ให้เชื่อ emo_nbr 
+--select * 
+--from VW_EMO_LIST_NEWCA
+--where emo_nbr not like '007%' 
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+--and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+--and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--emo_list0
+insert into EMO_LIST0
+select * 
+from VW_EMO_LIST_NEWCA
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+--update
+update cashed_emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+
+
+update emo_list
+set EMO_AUDIT_DTE_TME = '20'+substring(emo_nbr,7,2) + '-' + substring(emo_nbr,9,2) + '-' + substring(emo_nbr,11,2) + ' '+ convert(VARCHAR(8), EMO_AUDIT_DTE_TME, 108)
+where emo_nbr not like '007%' 
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_STATUS1,12))      between 1 and 60			--1 และ 60 คือ emo_nbr < EMO_STATUS1 ตั้งแต่ 1 ถึง 60 วัน
+and   DATEDIFF(DAY,SUBSTRING(emo_nbr,7,6),convert(nvarchar(6),EMO_AUDIT_DTE_TME,12))not in('0')
+and	  convert(nvarchar(4),EMO_AUDIT_DTE_TME,12) >= '2006'
+--------------------------------------------------------------------------------------
+
+
+END
+,948,11930,-10982,585195,1,15174

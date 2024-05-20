@@ -1,0 +1,17 @@
+﻿master,master,Data File(s),5,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),2,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\mastlog.ldf
+model,modeldev,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),22,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),5,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\MSDBLog.ldf
+NSW,NSW,Data File(s),8,M:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\Data\NSW.mdf
+NSW,NSW_log,Log File(s),8,N:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\Data\NSW_log.ldf
+tempdb,tempdev,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb.mdf
+tempdb,temp2,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_2.ndf
+tempdb,temp3,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_3.ndf
+tempdb,temp4,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_4.ndf
+tempdb,temp5,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_5.ndf
+tempdb,temp6,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_6.ndf
+tempdb,temp7,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_7.ndf
+tempdb,temp8,Data File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\tempdb_mssql_8.ndf
+tempdb,templog,Log File(s),8,C:\Program Files\Microsoft SQL Server\MSSQL16.NSW\MSSQL\DATA\templog.ldf

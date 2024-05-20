@@ -1,0 +1,13 @@
+﻿emo,EMO_Data,Data File(s),4631,F:\EMODB\emo_data1.mdf
+emo,EMO_1_Data,Data File(s),31707,G:\EMODB2\emo_Data2.mdf
+emo,EMO_HSTRY01,Data File(s),25813,F:\EMODB\emo_hstry1.mdf
+emo,EMO_HSTRY02,Data File(s),3298,G:\EMODB2\emo_hstry2.mdf
+emo,EMO_Log,Log File(s),31987,F:\EMODB\emo_log.ldf
+master,master,Data File(s),4,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),1,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\mastlog.ldf
+model,modeldev,Data File(s),2,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),46,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),676,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),14,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\MSDBLog.ldf
+tempdb,tempdev,Data File(s),4096,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\tempdb.mdf
+tempdb,templog,Log File(s),1279,F:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\templog.ldf

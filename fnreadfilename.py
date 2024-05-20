@@ -8,7 +8,7 @@ def readfilesname(path):
     i=0
     temp=[]
     while i <len(dir_list):
-        if str(dir_list[i])[-6:] == '_2.csv':
+        if str(dir_list[i])[-6:] == '_5.csv':
             temp.append(dir_list[i])
         i=i+1
     return temp

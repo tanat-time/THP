@@ -1,0 +1,12 @@
+﻿master,master,Data File(s),5,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),2,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\mastlog.ldf
+MDW_WMS,MDW_WMS,Data File(s),8950,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_WMS.mdf
+MDW_WMS,MDW_WMS_log,Log File(s),490,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_WMS_log.ldf
+model,modeldev,Data File(s),4,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),26,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),444,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),61,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\MSDBLog.ldf
+tempdb,tempdev,Data File(s),8,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\tempdb.mdf
+tempdb,templog,Log File(s),0,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\templog.ldf
+WMS,WMS,Data File(s),12,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\WMS.mdf
+WMS,WMS_log,Log File(s),1,C:\ClusterStorage\Database\MSSQL12.WMS\MSSQL\DATA\WMS_log.ldf

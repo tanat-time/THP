@@ -1,0 +1,12 @@
+﻿master,master,Data File(s),5,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\master.mdf
+master,mastlog,Log File(s),2,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\mastlog.ldf
+MDW_DEPLOY,MDW_DEPLOY,Data File(s),13450,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_DEPLOY.mdf
+MDW_DEPLOY,MDW_DEPLOY_log,Log File(s),14520,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\MDW_DEPLOY_log.ldf
+model,modeldev,Data File(s),4,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\model.mdf
+model,modellog,Log File(s),12,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\modellog.ldf
+msdb,MSDBData,Data File(s),488,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\MSDBData.mdf
+msdb,MSDBLog,Log File(s),46,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\MSDBLog.ldf
+tempdb,tempdev,Data File(s),8,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\tempdb.mdf
+tempdb,templog,Log File(s),0,C:\ClusterStorage\Database\MSSQL12.DEPLOY\MSSQL\DATA\templog.ldf
+Uat_THPNSW,Uat_THPNSW,Data File(s),1460,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\Uat_THPNSW.mdf
+Uat_THPNSW,Uat_THPNSW_log,Log File(s),894,C:\ClusterStorage\Database4\MSSQL12.DEPLOY\MSSQL\DATA\Uat_THPNSW_log.ldf
